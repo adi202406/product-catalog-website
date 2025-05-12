@@ -5,10 +5,10 @@ namespace App\Providers\Filament;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
+use App\Models\ShopInfo;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use App\Filament\Widgets\ShopInfoWidget;
-use App\Models\ShopInfo;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -19,6 +19,7 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,6 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->spa()
             ->login()
+            ->loginRouteSlug('login')
+            ->authGuard('web')
             ->brandName(fn() => ShopInfo::first()->name ?? env('APP_NAME')) // Add th 
             ->colors([
                 'primary' => Color::Amber,
@@ -57,6 +60,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                TwoFactorAuthenticationPlugin::make()
+                        ->addTwoFactorMenuItem() // Add 2FA settings to user menu items
+                        ->enforceTwoFactorSetup() // Enforce 2FA setup for all users
             ]);
     }
 }

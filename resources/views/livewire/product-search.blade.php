@@ -1,6 +1,6 @@
 <div 
     x-data="{ focused: false }" 
-    class="fixed top-5 right-4 z-50 w-full flex justify-end px-4 sm:px-8"
+    class="fixed top-5 right-0 lg:right-16  sm z-50 w-full flex justify-end px-4 sm:px-8"
 >
     <div 
         :class="focused ? 'w-[85vw] sm:w-[600px]' : 'w-14 sm:w-[500px]'" 

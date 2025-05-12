@@ -109,12 +109,12 @@ class ProductCatalog extends Component
             $searchTerm = '%' . $this->searchQuery . '%';
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', $searchTerm)
-                  ->orWhere('description', 'like', $searchTerm)
                   ->orWhereHas('category', function ($catQuery) use ($searchTerm) {
                       $catQuery->where('name', 'like', $searchTerm);
                   })
                   ->orWhereHas('types', function ($typeQuery) use ($searchTerm) {
                       $typeQuery->where('name', 'like', $searchTerm);
+                      $typeQuery->where('description', 'like', $searchTerm);
                   });
             });
         }

@@ -1,7 +1,7 @@
-<footer
-    class="w-full  dark:bg-gray-900 transition-colors duration-200 text-gray-700 dark:text-gray-300 py-12">
+<footer class="w-full  dark:bg-gray-900 transition-colors duration-200 text-gray-700 dark:text-gray-300 py-12">
     <div class="container mx-auto px-6 md:px-12 lg:px-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
 
             <!-- Logo & Description -->
             <section aria-labelledby="footer-brand" class="space-y-4">
@@ -36,7 +36,11 @@
                             <path
                                 d="M22 16.92v3a2 2 0 01-2.18 2A19.8 19.8 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.05 12.05 0 005.1 7.42A2 2 0 0116 13v3a2 2 0 01-1.72 2z" />
                         </svg>
-                        <a href="tel:{{ $shopInfo->phone }}" class="hover:underline">{{ $shopInfo->phone }}</a>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $shopInfo->phone) }}" target="_blank"
+                            class="hover:underline">
+                            {{ $shopInfo->phone }}
+                        </a>
+
                     </div>
                     <div class="flex items-center space-x-3">
                         <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="2"
@@ -55,10 +59,9 @@
                 <div class="flex flex-wrap gap-4">
                     @foreach ($shopInfo->socialMedia as $social)
                         @if ($social->is_active)
-                            <a href="{{ Storage::url($social->url) }}" target="_blank"
-                                aria-label="{{ ucfirst($social->url) }}">
+                            <a href="{{ $social->url }}" target="_blank" aria-label="{{ ucfirst($social->url) }}">
                                 <img src="{{ Storage::url($social->icon) }}" alt="{{ $social->icon }}"
-                                    class="object-contain w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" />
+                                    class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 object-cover p-0" />
                             </a>
                         @endif
                     @endforeach

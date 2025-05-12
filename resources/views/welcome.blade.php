@@ -11,14 +11,12 @@
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:title" content="{{ $shop->name ?? 'My Shop' }}">
     <meta property="og:description" content="{{ $shop->description ?? 'My Description Shop' }}">
-    <meta property="og:image" content="{{ Storage::url($shop->url_logo) ?? null }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url('/') }}">
     <meta property="twitter:title" content="{{ $shop->name ?? 'My Shop' }}">
     <meta property="twitter:description" content="{{ $shop->description ?? 'My Description Shop' }}">
-    <meta property="twitter:image" content="{{ Storage::url($shop->url_logo) ?? null }}">
 
     <link rel="canonical" href="{{ url('/') }}">
 
